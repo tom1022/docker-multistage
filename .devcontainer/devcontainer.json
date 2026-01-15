@@ -1,0 +1,35 @@
+{
+  "name": "Go Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".",
+    "args": {
+      "USER_UID": "1000",
+      "USER_GID": "1000"
+    }
+  },
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.Go",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.makefile-tools",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ],
+      "settings": {
+        "go.toolsManagement.autoUpdate": true,
+        "go.useLanguageServer": true,
+        "go.gopath": "/go",
+        "go.formatTool": "gofmt",
+        "go.lintTool": "staticcheck"
+      }
+    }
+  },
+  "postCreateCommand": "go env",
+  "runArgs": ["--init"],
+  "ports": ["8080:8080", "3000:3000"]
+}
